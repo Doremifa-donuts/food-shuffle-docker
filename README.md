@@ -12,3 +12,4 @@
 3. .envファイルをディレクトリ直下に配置
 4. コンテナを起動
     ```docker compose up -d```
+5. [food-shuffle-api](https://github.com/Doremifa-donuts/food-shuffle-api)をクローン
