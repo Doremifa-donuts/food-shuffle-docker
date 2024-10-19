@@ -5,7 +5,7 @@ services:
             context: ./go-api-srv
             dockerfile: ./Dockerfile
         ports:
-            - ${GO_PORT}:8888
+            - ${GO_PORT}:${GO_PORT}
         volumes:
             - ./go-api-srv/share:/root/share
         env_file:
@@ -14,7 +14,7 @@ services:
         tty: true
 
     redis:
-        container_name: food_shuffle_redis_srv
+        container_name: food_shuffle_redis
         image: redis:7.4.1-bookworm
         ports:
             - ${REDIS_PORT}:6379
@@ -23,9 +23,11 @@ services:
 
     mysql:
         container_name: food_shuffle_mysql
-        image: mysql:latest
+        build:
+            context: ./mysql-srv
+            dockerfile: ./Dockerfile
         ports:
-            - ${MYSQL_PORT}:3306
+            - ${MYSQL_PORT}:${MYSQL_PORT}
         environment:
             TZ: ${TZ:-Asia/Tokyo}
             MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
